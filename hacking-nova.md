@@ -1,5 +1,6 @@
 ---
 title: Hacking Nova
+layout: default
 ---
 
 So, you wanna start hacking the nova cloud?  It's easier than you may think.  This article is designed to help you through the process of getting the most recent code, running it in developer mode, and beginning to understand the layout of the codebase so that you can make changes, improvements, or fix bugs.

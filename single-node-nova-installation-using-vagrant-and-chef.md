@@ -1,5 +1,6 @@
 ---
 title: single node nova installation using vagrant and chef
+layout: default
 ---
 
 Integration testing for distributed systems that have many dependencies can be a huge challenge.  Ideally, you would have a cluster of machines that you could PXE boot to a base os install and run a complete install of the system.  Unfortunately not everyone has a bunch of extra hardware sitting around.  For those of us that are a bit on the frugal side, a whole lot of testing can be done with Virtual Machines.  Read on for a simple guide to installing Nova with VirtualBox and Vagrant.
