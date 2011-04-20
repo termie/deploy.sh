@@ -1,5 +1,8 @@
-Rackspace Cloud Builers provides custom packages that have been tested more rigorously then the current openstack trunk.  This allows users to try out new features in the openstack code between releases without worrying about stability issues.  There are a few minor differences in deploying nova using these packages.  A set of instructions for getting up and running using the cloudbuilders packages is outlined below.
+---
+title: Using Dev Packages
+---
 
+Rackspace Cloud Builers provides custom packages that have been tested more rigorously then the current openstack trunk.  This allows users to try out new features in the openstack code between releases without worrying about stability issues.  There are a few minor differences in deploying nova using these packages.  A set of instructions for getting up and running using the cloudbuilders packages is outlined below.
 
 ### Prerequisites
 
