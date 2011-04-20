@@ -1,5 +1,7 @@
 ---
 title: Deployment
+layout: default
+
 ---
 
 # Cloud Builder Docs

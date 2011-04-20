@@ -1,3 +1,7 @@
+---
+title: multi node nova installation using vagrant and chef
+---
+
 NOTE:  This is only for the brave of heart at the moment.  The instructions below are highly experimental.  If you just want to kick the tires, we suggest you see our instructions on single node vagrant testing.
 
 ### Get the latest Virtual Box
