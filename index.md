@@ -1,15 +1,20 @@
----
-title: Home
----
+# Cloud Builder Docs
 
-### documents
+## documents
 
- * <a href="hacking-nova.html">hacking nova</a>
- * <a href="single-node-nova-installation-using-vagrant-and-chef.html">single node nova installation using vagrant and chef</a>
- * <a href="multi-node-nova-installation-using-vagrant-and-chef.html">multi node nova installation using vagrant and chef</a>
- * <a href="using-dev-packages.html">using dev packages</a>
+ * [hacking nova](hacking-nova.html)
+ * [single node nova installation using vagrant and chef](single-node-nova-installation-using-vagrant-and-chef.html)
+ * [multi node nova installation using vagrant and chef](multi-node-nova-installation-using-vagrant-and-chef.html)
+ * [using dev packages](using-dev-packages.html)
 
-### scripts
+## scripts
 
-   curl -Sks https://github.com/cloudbuilders/deploy.sh/raw/master/setup.sh | /bin/bash
+### lxc + ubuntu powered demo/testing deployment:
+
+From a base maverick install, use LXC to configure a multi-mode openstack deployment using:
+
+ * DHCP: pxe + preseed, tftp, dnsmasq
+ * CHEF: chef-server, openstack recipes
+
+        curl -Sks https://github.com/cloudbuilders/deploy.sh/raw/master/setup.sh | /bin/bash
 
