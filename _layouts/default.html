@@ -8,6 +8,20 @@
     <link href="http://github.com/stylesheets/bundle_common.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="http://github.com/stylesheets/bundle_github.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+      code {
+        background-color: black;
+        border: 1px solid #DEDEDE !important;
+        color: #0F0;
+        font-size: 12px !important;
+        margin: 1em 0px !important;
+        padding: 0.5em !important;
+        font: normal normal normal 12px/normal Monaco, 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+        display: block;
+        width: 100%;
+        overflow-x: scroll;
+      }
+    </style>
   </head>
   <body>
     <div id="main">
@@ -19,8 +33,9 @@
           </div>
           <div class="topsearch">
             <ul class="nav logged_out" style="margin-top:20px">
-              <li><a href="http://rackspace.com/cloudbuilders/">Home</a></li>
+              <li><a href="http://rackspace.com/cloudbuilders/">Cloud Builders</a></li>
               <li><a href="http://github.com/cloudbuilders">GitHub</a></li>
+              <li><a href="http://launchpad.net/~cloudbuilders">Launchpad</a></li>
             </ul>
           </div>
         </div>
@@ -39,22 +54,11 @@
       <div class="site">
 
         <div class="info">
-          <div class="links">
-            <a href="http://github.com/blog"><b>Blog</b></a> |
-            <a href="http://support.github.com/">Support</a> |
-            <a href="http://github.com/training">Training</a> |
-            <a href="http://github.com/contact">Contact</a> |
-            <a href="http://develop.github.com">API</a> |
-            <a href="http://status.github.com">Status</a> |
-            <a href="http://twitter.com/github">Twitter</a> |
-            <a href="http://github.com/security">Security</a>
-          </div>
           <div class="company">
            &copy;
             {{ site.time | date: "%Y" }}
-            GitHub Inc.
+            Rackspace, US Inc.
             All rights reserved.
-           | <a href="http://github.com/site/terms">Terms of Service</a> | <a href="http://github.com/site/privacy">Privacy</a>
           </div>
         </div>
       </div>
