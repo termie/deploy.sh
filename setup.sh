@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 DHCP_RANGE=8.21.28.0/0
 # can be calcualted
 NETMASK=255.255.255.0
@@ -70,6 +72,8 @@ EOF
     fi
 
     lxc-start -dn ${d}
+
+    sed -i -e 's/^#*PermitRoot.*/PermitRootLogin without-password/' ${ROOTFS}/etc/ssh/sshd_config 
 done
 
 
