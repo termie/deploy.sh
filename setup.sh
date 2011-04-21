@@ -116,9 +116,42 @@ function ssh_it {
 
 ssh_it "root@${chef_host}" "apt-get install -y ruby ruby-dev libopenssl-ruby rdoc ri irb build-essential wget ssl-cert rubygems"
 ssh_it "root@${chef_host}" "gem install chef -y --no-ri --no-rdoc"
-# cp_it 
-# FIXME add solo.rb
-# ssh_it "root@${chef_host}" "chef-solo -c /etc/chef/solo.rb -j ~/chef.json -r http://s3.amazonaws.com/chef-solo/bootstrap-latest.tar.gz"
+
+TMPDIR=`mktemp -d`
+cat > ${TMPDIR}/solo.rb <<EOF
+file_cache_path "/tmp/chef-solo"
+cookbook_path "/tmp/chef-solo/cookbooks"
+recipe_url "http://s3.amazonaws.com/chef-solo/bootstrap-latest.tar.gz"
+EOF
+
+cat > ${TMPDIR}/chef.json <<EOF
+{
+"bootstrap": {
+"chef": {
+"url_type": "http",
+"init_style": "runit",
+"path": "/srv/chef",
+"serve_path": "/srv/chef",
+"server_fqdn": "chef.`hostname -d`",
+"webui_enabled": true
+}
+},
+"run_list": [ "recipe[chef::bootstrap_server]" ]
+}
+EOF
+
+mkdir -p /var/lib/lxc/chef/rootfs/etc/chef
+cp ${TMPDIR}/solo.rb /var/lib/lxc/chef/rootfs/etc/chef/
+cp ${TMPDIR}/chef.json /var/lib/lxc/chef/rootfs/etc/chef/chef-bootstrap.json
+
+if [ "${TMPDIR}" = "" ]; then
+    echo "Close one"
+    exit 1
+fi
+
+rm -rf "${TMPDIR}"
+ssh_it "root@${chef_host}" "/var/lib/gems/1.8/bin/chef-solo -c /etc/chef/solo.rb -j /etc/chef/chef-bootstrap.json -r http://s3.amazonaws.com/chef-solo/bootstrap-latest.tar.gz"
+
 
 
 
