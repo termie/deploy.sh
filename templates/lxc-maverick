@@ -32,6 +32,9 @@ configure_maverick()
     mkdir -p $rootfs/selinux
     echo 0 > $rootfs/selinux/enforce
 
+    # disable root login
+    sed -i -e 's/^#*PermitRoot.*/PermitRootLogin without-password/' ${rootfs}/etc/ssh/sshd_config 
+
    # configure the network using the dhcp
     cat <<EOF > $rootfs/etc/network/interfaces
 auto lo

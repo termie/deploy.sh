@@ -103,7 +103,8 @@ EOF
 
     # add keyring
 
-    sed -i -e 's/^#*PermitRoot.*/PermitRootLogin without-password/' ${ROOTFS}/etc/ssh/sshd_config 
+    # moved this to the template
+    # sed -i -e 's/^#*PermitRoot.*/PermitRootLogin without-password/' ${ROOTFS}/etc/ssh/sshd_config 
     lxc-start -dn ${d}
 
     # Wait for machine to come up
