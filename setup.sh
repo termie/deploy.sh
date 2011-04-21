@@ -5,20 +5,20 @@ for d in chef dhcp; do lxc-stop -n $d; rm -rf /var/lib/lxc/$d; done
 set -e
 set -x
 
-DHCP_LOW=8.21.28.242
-DHCP_HIGH=8.21.28.250
+DHCP_LOW=192.168.2.242
+DHCP_HIGH=192.168.2.250
 
 # can be calcualted
 NETMASK=255.255.255.0
-GATEWAY=8.21.28.1
+GATEWAY=192.168.2.1
 
 # broken!
 MY_IP=`/sbin/ifconfig br0 | grep "inet " | cut -d ':' -f2 | cut -d ' ' -f1`
 
 # these we should intuit
 
-chef_host=8.21.28.240
-dhcp_host=8.21.28.241
+chef_host=192.168.2.240
+dhcp_host=192.168.2.241
 
 function ssh_it { 
    ssh -i ~/.ssh/id_builder -o StrictHostKeyChecking=no $1 "$2" 
@@ -54,7 +54,7 @@ for d in dhcp chef; do
     ROOTFS=/var/lib/lxc/${d}/rootfs
 
     if [ ! -x ${ROOTFS} ]; then
-	lxc-create -n ${d} -f /var/lib/lxc/builder.conf -t ubuntu
+	lxc-create -n ${d} -f /var/lib/lxc/builder.conf -t maverick
     fi
 
     var=\$${d}_host
@@ -107,14 +107,15 @@ EOF
     lxc-start -dn ${d}
 
     # Wait for machine to come up
-    if( ! ping -W10 -c1 $IP ); then
+    if( ! ping -W1 -c20 $IP ); then
 	echo "Can't start server.  Bad."
 	exit 1
     fi
     
-#    ssh_it "root@${IP} apt-get update"
-    ssh_it "root@${IP} apt-get install -y --force-yes ubuntu-keyring netbase gnupg"
     ssh_it "root@${IP} apt-get update"
+#    ssh_it "root@${IP} apt-get install -fy --force-yes"
+#    ssh_it "root@${IP} apt-get install -y --force-yes ubuntu-keyring netbase gnupg gpgv"
+#    ssh_it "root@${IP} apt-get update"
 done
 
 
@@ -195,7 +196,7 @@ LABEL maverick
 EOF
 
 mkdir -p ${ROOTFS}/var/lib/builder/www
-cp ~/id_builder.pub ${ROOTFS}/var/lib/builder/www/id_dsa.pub
+cp ~/.ssh/id_builder.pub ${ROOTFS}/var/lib/builder/www/id_dsa.pub
 cat > ${ROOTFS}/var/lib/builder/www/preseed.txt <<EOF
 d-i pkgsel/install-language-support boolean false
 d-i debian-installer/locale string en_US
