@@ -20,8 +20,8 @@ MY_IP=`/sbin/ifconfig br0 | grep "inet " | cut -d ':' -f2 | cut -d ' ' -f1`
 chef_host=8.21.28.240
 dhcp_host=8.21.28.241
 
-function ssh_it { 
-   ssh -i ~/.ssh/id_builder -o StrictHostKeyChecking=no $1 "$2" 
+function ssh_it {
+   ssh -i ~/.ssh/id_builder -o StrictHostKeyChecking=no $1 "$2"
 }
 
 if [ ! -x /usr/share/doc/apt-cacher ]; then
@@ -50,7 +50,7 @@ if [ ! -f ~/.ssh/id_builder.pub ]; then
     ssh-keygen -d -P "" -f ~/.ssh/id_builder
 fi
 
-for d in dhcp chef; do 
+for d in dhcp chef; do
     ROOTFS=/var/lib/lxc/${d}/rootfs
 
     if [ ! -x ${ROOTFS} ]; then
@@ -67,7 +67,7 @@ for d in dhcp chef; do
 auto lo
 iface lo inet loopback
 
-auto eth0 
+auto eth0
 iface eth0 inet static
       address $IP
       netmask $NETMASK
@@ -103,7 +103,7 @@ EOF
 
     # add keyring
 
-    sed -i -e 's/^#*PermitRoot.*/PermitRootLogin without-password/' ${ROOTFS}/etc/ssh/sshd_config 
+    sed -i -e 's/^#*PermitRoot.*/PermitRootLogin without-password/' ${ROOTFS}/etc/ssh/sshd_config
     lxc-start -dn ${d}
 
     # Wait for machine to come up
@@ -111,8 +111,8 @@ EOF
 	echo "Can't start server.  Bad."
 	exit 1
     fi
-    
-#    ssh_it "root@${IP} apt-get update"
+
+    ssh_it "root@${IP} apt-get update"
     ssh_it "root@${IP} apt-get install -y --force-yes ubuntu-keyring netbase gnupg"
     ssh_it "root@${IP} apt-get update"
 done
