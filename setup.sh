@@ -2,8 +2,6 @@
 
 for d in chef dhcp; do lxc-stop -n $d; rm -rf /var/lib/lxc/$d; done
 
-# touch to test out pull request <--> issue integration
-
 set -e
 set -x
 
