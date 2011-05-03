@@ -2,6 +2,8 @@
 
 for d in chef dhcp; do lxc-stop -n $d; rm -rf /var/lib/lxc/$d; done
 
+#lalalal
+
 set -e
 set -x
 
